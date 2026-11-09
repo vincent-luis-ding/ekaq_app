@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.webkit.WebChromeClient
+import android.webkit.WebSettings
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 
@@ -19,18 +20,26 @@ class MainActivity : AppCompatActivity() {
         webView = WebView(this).apply {
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
+            settings.cacheMode = WebSettings.LOAD_DEFAULT
+            settings.loadWithOverviewMode = true
+            settings.useWideViewPort = true
+            settings.mediaPlaybackRequiresUserGesture = false
+            settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
             webViewClient = WebViewClient()
             webChromeClient = WebChromeClient()
-            setBackgroundColor(Color.WHITE)
+            setBackgroundColor(Color.parseColor("#0B111E"))
         }
         setContentView(webView)
 
-        webView.loadDataWithBaseURL(
-            null,
-            "<html><body style='background:#fff;color:#000;padding:40px;'><h1>Hello EKAQ</h1><p>WebView rendering test</p></body></html>",
-            "text/html",
-            "utf-8",
-            null
-        )
+        webView.loadUrl("https://ekaq.com")
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack()
+        } else {
+            super.onBackPressed()
+        }
     }
 }
