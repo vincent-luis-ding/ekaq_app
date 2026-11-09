@@ -1,11 +1,12 @@
 package com.ekaq.app
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.view.View
-import android.view.WindowManager
+import android.webkit.WebChromeClient
+import android.webkit.WebSettings
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -16,22 +17,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Fullscreen immersive mode
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-        )
-
         webView = WebView(this).apply {
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
+            settings.cacheMode = WebSettings.LOAD_DEFAULT
             settings.loadWithOverviewMode = true
             settings.useWideViewPort = true
+            settings.mediaPlaybackRequiresUserGesture = false
             webViewClient = WebViewClient()
-            layoutParams = android.widget.FrameLayout.LayoutParams(
-                android.widget.FrameLayout.LayoutParams.MATCH_PARENT,
-                android.widget.FrameLayout.LayoutParams.MATCH_PARENT
-            )
+            webChromeClient = WebChromeClient()
+            setBackgroundColor(Color.parseColor("#0B111E"))
         }
         setContentView(webView)
 
@@ -43,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         if (webView.canGoBack()) {
             webView.goBack()
         } else {
-            @Suppress("DEPRECATION")
             super.onBackPressed()
         }
     }
