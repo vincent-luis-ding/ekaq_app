@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.webkit.WebChromeClient
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 
@@ -17,16 +18,19 @@ class MainActivity : AppCompatActivity() {
 
         webView = WebView(this).apply {
             settings.javaScriptEnabled = true
+            settings.domStorageEnabled = true
             webViewClient = WebViewClient()
+            webChromeClient = WebChromeClient()
             setBackgroundColor(Color.WHITE)
         }
         setContentView(webView)
 
-        // White background + test text
-        webView.loadData(
-            "<html><body style='background:#fff;color:#000;padding:40px;font-family:sans-serif;'><h1>WebView Test</h1><p>If you see this on white background, WebView works!</p></body></html>",
+        webView.loadDataWithBaseURL(
+            null,
+            "<html><body style='background:#fff;color:#000;padding:40px;'><h1>Hello EKAQ</h1><p>WebView rendering test</p></body></html>",
             "text/html",
-            "utf-8"
+            "utf-8",
+            null
         )
     }
 }
