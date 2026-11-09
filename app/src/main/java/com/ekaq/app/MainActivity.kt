@@ -4,8 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.webkit.WebChromeClient
-import android.webkit.WebSettings
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -15,29 +14,19 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        webView = findViewById<WebView>(R.id.webview).apply {
+        webView = WebView(this).apply {
             settings.javaScriptEnabled = true
-            settings.domStorageEnabled = true
-            settings.cacheMode = WebSettings.LOAD_DEFAULT
-            settings.loadWithOverviewMode = true
-            settings.useWideViewPort = true
-            settings.mediaPlaybackRequiresUserGesture = false
-            settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
             webViewClient = WebViewClient()
-            webChromeClient = WebChromeClient()
+            setBackgroundColor(Color.WHITE)
         }
+        setContentView(webView)
 
-        webView.loadUrl("https://ekaq.com")
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack()
-        } else {
-            super.onBackPressed()
-        }
+        // White background + test text
+        webView.loadData(
+            "<html><body style='background:#fff;color:#000;padding:40px;font-family:sans-serif;'><h1>WebView Test</h1><p>If you see this on white background, WebView works!</p></body></html>",
+            "text/html",
+            "utf-8"
+        )
     }
 }
