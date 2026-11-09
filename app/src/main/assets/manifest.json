@@ -1,0 +1,25 @@
+{
+  "scope": "/",
+  "name": "EKAQ — Longevity Life",
+  "description": "EKAQ — Next-Generation Cellular Fuel. Founded in Frankfurt, 2026.",
+  "orientation": "portrait",
+  "short_name": "EKAQ",
+  "display": "standalone",
+  "theme_color": "#0B111E",
+  "start_url": "/",
+  "background_color": "#0B111E",
+  "icons": [
+    {
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable",
+      "src": "/icon-192.png"
+    },
+    {
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable",
+      "src": "/icon-512.png"
+    }
+  ]
+}

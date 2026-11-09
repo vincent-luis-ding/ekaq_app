@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="EKAQ — Next-Generation Cellular Fuel. Breakthrough bio-active nutrition engineered in Frankfurt, Germany, 2026.">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0B111E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="EKAQ">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<title>EKAQ · Next-Generation Cellular Fuel</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B111E'/%3E%3Cpath d='M18 32 C18 22 32 22 32 32 C32 42 46 42 46 32 C46 22 32 22 32 32 C32 42 18 42 18 32 Z' fill='none' stroke='%2300D2FF' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='46' cy='32' r='3' fill='%2300F2FE'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn" crossorigin>
+<link href="https://miaoda.feishu.cn/fonts/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme: { extend: { colors: {
+  deep: '#0B111E', panel: '#0F172A', cyanx: '#00D2FF', elect: '#00F2FE', silver: '#C9D4E3', bone: '#F6F8FC'
+} } } };
+</script>
+<style>
+:root{
+  --deep:#0B111E; --panel:#0F172A; --cyan:#00D2FF; --elect:#00F2FE; --silver:#C9D4E3; --bone:#F6F8FC;
+  --grad:linear-gradient(120deg,#00D2FF,#00F2FE);
+  --ekaq-e:#F5C518; --ekaq-k:#E8792B; --ekaq-a:#4CAF50; --ekaq-q:#8B2D5C;
+}
+*{-webkit-font-smoothing:antialiased;}
+html{scroll-behavior:smooth;}
+body{background:var(--deep);color:var(--bone);font-family:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;overflow-x:hidden;}
+.font-display{font-family:'Space Grotesk',system-ui,sans-serif;}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.grad-bar{background:var(--grad);}
+hr.hairline{border:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,210,255,.5),transparent);}
+
+/* decorative background layers */
+.bg-grid{background-image:linear-gradient(rgba(0,210,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,210,255,.05) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 80% 70% at 50% 0%,#000 40%,transparent 100%);}
+.orb{position:absolute;border-radius:9999px;filter:blur(90px);opacity:.35;pointer-events:none;}
+
+/* glass cards */
+.glass{background:linear-gradient(160deg,rgba(15,23,42,.72),rgba(11,17,30,.55));backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(0,210,255,.18);box-shadow:0 20px 60px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.06);}
+.glow{box-shadow:0 0 0 1px rgba(0,210,255,.15),0 10px 50px rgba(0,210,255,.12);}
+
+/* signature double helix */
+.helix{transform-origin:center;animation:helixFloat 9s ease-in-out infinite;}
+.helix .strand{stroke-dasharray:6 8;animation:dashFlow 16s linear infinite;}
+@keyframes dashFlow{to{stroke-dashoffset:-280;}}
+@keyframes helixFloat{0%,100%{transform:rotate(0deg) translateY(0);}50%{transform:rotate(2deg) translateY(-8px);}}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1);}
+.rv.in{opacity:1;transform:none;}
+
+/* hero shine sweep on primary CTA */
+.btn-cta{position:relative;overflow:hidden;}
+.btn-cta::after{content:"";position:absolute;top:0;left:-120%;height:100%;width:60%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);transition:left .6s ease;}
+.btn-cta:hover::after{left:130%;}
+
+/* nav link underline */
+.nlink{position:relative;}
+.nlink::after{content:"";position:absolute;left:0;bottom:-4px;height:1px;width:0;background:var(--grad);transition:width .3s ease;}
+.nlink:hover::after{width:100%;}
+
+#toast{transition:opacity .3s ease,transform .3s ease;will-change:transform;}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  .helix,.helix .strand,.rv{animation:none!important;transition:none!important;}
+  .rv{opacity:1;transform:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 装饰背景层 ===== -->
+<div class="fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+  <div class="absolute inset-0 bg-grid"></div>
+  <div class="orb w-[520px] h-[520px] bg-[#00D2FF] top-[-160px] left-[-80px]"></div>
+  <div class="orb w-[420px] h-[420px] bg-[#0E5FA8] top-[18%] right-[-140px]"></div>
+  <div class="orb w-[480px] h-[480px] bg-[#00F2FE] bottom-[-180px] left-[30%]" style="opacity:.18"></div>
+</div>
+
+<!-- ===== 导航栏 ===== -->
+<header id="nav" class="fixed top-0 inset-x-0 z-50 transition-colors duration-300" style="background:rgba(11,17,30,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,210,255,.12);">
+  <nav class="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between" aria-label="Main">
+    <!-- Logo -->
+    <a href="#top" class="flex items-center group" aria-label="EKAQ home">
+      <img src="assets/logo.png" alt="EKAQ" class="h-10 w-auto object-contain">
+    </a>
+
+    <div class="hidden md:flex items-center gap-8 text-sm text-silver/90">
+      <a href="#products" class="nlink" data-i18n="nav_products">Products</a>
+      <a href="#science" class="nlink" data-i18n="nav_science">Science &amp; Heritage</a>
+      <a href="#team" class="nlink" data-i18n="nav_team">Team</a>
+      <a href="#contact" class="nlink" data-i18n="nav_contact">Contact</a>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <div class="flex items-center rounded-full border border-cyanx/30 text-xs overflow-hidden">
+        <button id="btn-en" class="px-3 py-1.5 font-semibold bg-cyanx/15 text-cyanx" type="button">EN</button>
+        <button id="btn-de" class="px-3 py-1.5 text-silver/70 hover:text-bone" type="button">DE</button>
+      </div>
+      <button id="menu-btn" class="md:hidden text-bone p-2 rounded-md border border-cyanx/30" type="button" aria-label="Menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </nav>
+  <div id="mobile-menu" class="md:hidden hidden border-t border-cyanx/10 bg-deep/95 backdrop-blur-xl">
+    <div class="flex flex-col px-6 py-4 gap-4 text-bone">
+      <a href="#products" class="nlink" data-i18n="nav_products">Products</a>
+      <a href="#science" class="nlink" data-i18n="nav_science">Science &amp; Heritage</a>
+      <a href="#team" class="nlink" data-i18n="nav_team">Team</a>
+      <a href="#contact" class="nlink" data-i18n="nav_contact">Contact</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ===== HERO ===== -->
+<section class="relative pt-32 sm:pt-40 pb-20 sm:pb-28">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-12 items-center">
+    <div class="rv">
+      <p class="inline-flex items-center gap-2 text-xs tracking-[.25em] text-cyanx/90 font-semibold mb-6">
+        <span class="w-2 h-2 rounded-full bg-cyanx inline-block animate-pulse"></span>
+        <span data-i18n="hero_eyebrow">Founded in Frankfurt · 2026</span>
+      </p>
+      <h1 class="font-display font-700 text-4xl sm:text-5xl lg:text-6xl leading-[1.1] tracking-tight text-bone">
+        <span data-i18n="hero_l1">Eka as the source,</span><br class="hidden sm:block">
+        <span class="grad-text" data-i18n="hero_l2">converging the microscopic Q —</span><br>
+        <span data-i18n="hero_l3">exploring the next unknown of the body's energy.</span>
+      </h1>
+      <p class="mt-6 max-w-xl text-lg text-silver/90 leading-relaxed" data-i18n="hero_sub">
+        Breakthrough bio-active nutrition for peak human performance — precision-formulated, cell-level bio-availability.
+      </p>
+      <div class="mt-9 flex flex-col sm:flex-row gap-4">
+        <a href="subscribe.html" class="btn-cta inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-semibold text-deep grad-bar shadow-lg shadow-cyanx/25" data-i18n="cta_subscribe">Get the 4 Pillars Box →</a>
+        <a href="#products" class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-semibold text-bone border border-cyanx/40 hover:bg-cyanx/10 transition" data-i18n="cta_products">Explore Products</a>
+        <a href="#contact" class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-semibold text-bone border border-cyanx/40 hover:bg-cyanx/10 transition" data-i18n="cta_contact">Get in Touch</a>
+      </div>
+      <dl class="mt-10 grid grid-cols-3 gap-4 max-w-md">
+        <div class="glass rounded-xl p-3 text-center"><dt class="text-[10px] tracking-widest text-silver/60 uppercase" data-i18n="hero_stat_engine">Engine</dt><dd class="font-display text-xl text-cyanx">EQ</dd></div>
+        <div class="glass rounded-xl p-3 text-center"><dt class="text-[10px] tracking-widest text-silver/60 uppercase" data-i18n="hero_stat_origin">Origin</dt><dd class="font-display text-xl text-cyanx">DE</dd></div>
+        <div class="glass rounded-xl p-3 text-center"><dt class="text-[10px] tracking-widest text-silver/60 uppercase" data-i18n="hero_stat_founded">Founded</dt><dd class="font-display text-xl text-cyanx">2026</dd></div>
+      </dl>
+    </div>
+
+    <!-- signature: animated double helix -->
+    <div class="rv relative flex items-center justify-center min-h-[320px]">
+      <svg class="helix w-full max-w-[420px]" viewBox="0 0 240 300" aria-hidden="true">
+        <defs>
+          <linearGradient id="lgH" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#00D2FF"/><stop offset="1" stop-color="#00F2FE"/>
+          </linearGradient>
+        </defs>
+        <g class="strand" fill="none" stroke="url(#lgH)" stroke-width="5" stroke-linecap="round" opacity=".9">
+          <path d="M60 20 C120 60 120 90 60 130 C0 170 0 200 60 240 C120 280 120 286 60 300"/>
+          <path d="M180 20 C120 60 120 90 180 130 C240 170 240 200 180 240 C120 280 120 286 180 300"/>
+        </g>
+        <g stroke="url(#lgH)" stroke-width="3" opacity=".5">
+          <line x1="78" y1="45" x2="162" y2="45"/><line x1="98" y1="75" x2="142" y2="75"/>
+          <line x1="70" y1="105" x2="170" y2="105"/><line x1="70" y1="155" x2="170" y2="155"/>
+          <line x1="98" y1="185" x2="142" y2="185"/><line x1="78" y1="215" x2="162" y2="215"/>
+          <line x1="98" y1="245" x2="142" y2="245"/>
+        </g>
+        <circle cx="120" cy="135" r="22" fill="none" stroke="url(#lgH)" stroke-width="3" opacity=".45"/>
+        <circle cx="120" cy="135" r="4" fill="#00F2FE"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EKAQ 四瓶概念 ===== -->
+<section id="pillars" class="relative py-20 sm:py-24">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="rv mb-12 max-w-2xl">
+      <h2 class="font-display font-700 text-3xl sm:text-4xl tracking-tight text-bone"><span data-i18n="pillars_h2a">The</span> <span class="grad-text" data-i18n="pillars_h2b">4 Pillars</span></h2>
+      <p class="mt-4 text-silver/85 leading-relaxed" data-i18n="pillars_sub">EKAQ is not a single shot — it is four precision-formulated pillars, each targeting a core system of your body. One box, 30 days, four rituals a day.</p>
+    </div>
+
+    <div class="rv mb-12 max-w-3xl mx-auto">
+      <img src="assets/ekaq-products.png" alt="EKAQ The 4 Pillars Box — 30 shots, 4 pillars" class="w-full rounded-3xl glow shadow-2xl shadow-cyanx/10">
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      <!-- E -->
+      <div class="glass rounded-3xl p-6 rv" style="border-top:3px solid var(--ekaq-e);">
+        <div class="w-14 h-20 rounded-lg mb-4 flex items-center justify-center" style="background:linear-gradient(180deg,rgba(245,197,24,.25),rgba(245,197,24,.06));">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5C518" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z" fill="#F5C518" fill-opacity=".3"/></svg>
+        </div>
+        <span class="font-display font-700 text-2xl" style="color:var(--ekaq-e);">E</span>
+        <h3 class="font-display font-600 text-sm mt-1 text-bone" data-i18n="pillar_e_title">ENERGY</h3>
+        <p class="text-[11px] text-silver/60 mt-0.5" data-i18n="pillar_e_sub">Metabolic Energy · Yellow</p>
+        <p class="mt-3 text-sm text-silver/80 leading-relaxed" data-i18n="pillar_e_desc">Supports normal energy-yielding metabolism and mental vitality — your morning kickstart.</p>
+      </div>
+      <!-- K -->
+      <div class="glass rounded-3xl p-6 rv" style="border-top:3px solid var(--ekaq-k);">
+        <div class="w-14 h-20 rounded-lg mb-4 flex items-center justify-center" style="background:linear-gradient(180deg,rgba(232,121,43,.25),rgba(232,121,43,.06));">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8792B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M6.5 6.5 17.5 17.5M4 9l2-2M20 15l-2 2M9 4l2 2M15 20l2-2"/></svg>
+        </div>
+        <span class="font-display font-700 text-2xl" style="color:var(--ekaq-k);">K</span>
+        <h3 class="font-display font-600 text-sm mt-1 text-bone" data-i18n="pillar_k_title">KINETIC</h3>
+        <p class="text-[11px] text-silver/60 mt-0.5" data-i18n="pillar_k_sub">Kinetic Power · Orange</p>
+        <p class="mt-3 text-sm text-silver/80 leading-relaxed" data-i18n="pillar_k_desc">Supports strong muscles, mobile joints and stable bones — your midday movement fuel.</p>
+      </div>
+      <!-- A -->
+      <div class="glass rounded-3xl p-6 rv" style="border-top:3px solid var(--ekaq-a);">
+        <div class="w-14 h-20 rounded-lg mb-4 flex items-center justify-center" style="background:linear-gradient(180deg,rgba(76,175,80,.25),rgba(76,175,80,.06));">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2a2.5 2.5 0 0 0-2.45 3C5.5 5.5 4 7.5 4 10c0 3.5 2.5 6 6 8.5.6.4 1.4.4 2 0 3.5-2.5 6-5 6-8.5 0-2.5-1.5-4.5-3.05-5A2.5 2.5 0 0 0 9.5 2z"/></svg>
+        </div>
+        <span class="font-display font-700 text-2xl" style="color:var(--ekaq-a);">A</span>
+        <h3 class="font-display font-600 text-sm mt-1 text-bone" data-i18n="pillar_a_title">ALERT</h3>
+        <p class="text-[11px] text-silver/60 mt-0.5" data-i18n="pillar_a_sub">Mental Focus · Green</p>
+        <p class="mt-3 text-sm text-silver/80 leading-relaxed" data-i18n="pillar_a_desc">Supports concentration, mental performance and cognitive health — your afternoon clarity.</p>
+      </div>
+      <!-- Q -->
+      <div class="glass rounded-3xl p-6 rv" style="border-top:3px solid var(--ekaq-q);">
+        <div class="w-14 h-20 rounded-lg mb-4 flex items-center justify-center" style="background:linear-gradient(180deg,rgba(139,45,92,.3),rgba(139,45,92,.08));">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C0457A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V5l-8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <span class="font-display font-700 text-2xl" style="color:#C0457A;">Q</span>
+        <h3 class="font-display font-600 text-sm mt-1 text-bone" data-i18n="pillar_q_title">QUANTUM-SHIELD</h3>
+        <p class="text-[11px] text-silver/60 mt-0.5" data-i18n="pillar_q_sub">Cellular Immunity · Purple-Red</p>
+        <p class="mt-3 text-sm text-silver/80 leading-relaxed" data-i18n="pillar_q_desc">Supports a strong immune system and cells against oxidative stress — your overnight rebuild.</p>
+      </div>
+    </div>
+
+    <!-- CTA to subscribe -->
+    <div class="rv mt-10 text-center">
+      <a href="subscribe.html" class="btn-cta inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-deep grad-bar shadow-lg shadow-cyanx/25" data-i18n="pillars_cta">Subscribe — The 4 Pillars Box · 30 Shots</a>
+      <p class="mt-3 text-xs text-silver/60" data-i18n="pillars_price">€69.90 / month · 10 shots each of E·K·A·Q · Free shipping in DE · Cancel anytime</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 双核心产品线 ===== -->
+<section id="products" class="relative py-20 sm:py-24">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="rv mb-12 max-w-2xl">
+      <h2 class="font-display font-700 text-3xl sm:text-4xl tracking-tight text-bone"><span data-i18n="prod_h2a">Dual</span> <span class="grad-text" data-i18n="prod_h2b">Delivery Technologies</span></h2>
+      <p class="mt-4 text-silver/85 leading-relaxed" data-i18n="prod_sub">Two engineered formats, one principle: keep high-activity molecules stable until the moment of consumption, then deliver them with maximal bio-availability.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Product 1 -->
+      <article class="glass rounded-3xl overflow-hidden glow rv">
+        <div class="relative h-72 sm:h-80 overflow-hidden">
+          <img src="assets/products/pushcap-bottle.png" alt="EKAQ Push-Cap fresh-dispense bottle" class="w-full h-full object-cover object-top">
+          <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-[11px] font-semibold grad-bar text-deep">01</span>
+        </div>
+        <div class="p-6 sm:p-8">
+          <h3 class="font-display font-700 text-xl text-bone" data-i18n="prod1_title">Push-Cap Fresh-Dispense System</h3>
+          <p class="mt-3 text-silver/85 leading-relaxed text-sm" data-i18n="prod1_desc">High-activity sensitive molecules — such as monohydrate creatine — are held dry and isolated inside a sealed cap reservoir, fully separated from water. Press the cap, release the actives, shake and drink.</p>
+          <ul class="mt-5 grid gap-2 text-sm text-silver/80">
+            <li class="flex gap-2"><span class="text-cyanx">◆</span><span data-i18n="prod1_b1">Dry–liquid separation locks potency</span></li>
+            <li class="flex gap-2"><span class="text-cyanx">◆</span><span data-i18n="prod1_b2">No hydrolysis, no sedimentation</span></li>
+            <li class="flex gap-2"><span class="text-cyanx">◆</span><span data-i18n="prod1_b3">Fresh-mixed on demand</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Product 2 -->
+      <article class="glass rounded-3xl overflow-hidden glow rv">
+        <div class="relative h-72 sm:h-80 overflow-hidden">
+          <img src="assets/products/stick-pack.png" alt="EKAQ precision stick pack dissolving in water" class="w-full h-full object-cover object-center">
+          <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-[11px] font-semibold grad-bar text-deep">02</span>
+        </div>
+        <div class="p-6 sm:p-8">
+          <h3 class="font-display font-700 text-xl text-bone" data-i18n="prod2_title">Precision Stick Packs</h3>
+          <p class="mt-3 text-silver/85 leading-relaxed text-sm" data-i18n="prod2_desc">Microencapsulated fine powder, precision-balanced per daily serving — 3000&nbsp;mg creatine, taurine, chelated minerals and microencapsulated D3. Add to 250–300&nbsp;mL ambient water and stir.</p>
+          <ul class="mt-5 grid gap-2 text-sm text-silver/80">
+            <li class="flex gap-2"><span class="text-cyanx">◆</span><span data-i18n="prod2_b1">Instant dissolve, zero sediment</span></li>
+            <li class="flex gap-2"><span class="text-cyanx">◆</span><span data-i18n="prod2_b2">High bio-availability</span></li>
+            <li class="flex gap-2"><span class="text-cyanx">◆</span><span data-i18n="prod2_b3">Ultra-light, portable</span></li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 科学与起源 ===== -->
+<section id="science" class="relative py-20 sm:py-24">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="rv mb-12 max-w-2xl">
+      <h2 class="font-display font-700 text-3xl sm:text-4xl tracking-tight text-bone"><span data-i18n="sci_h2a">Science &amp;</span> <span class="grad-text" data-i18n="sci_h2b">Origin</span></h2>
+      <p class="mt-4 text-silver/85 leading-relaxed" data-i18n="sci_sub">The name encodes our thesis — the next undiscovered element of human performance, delivered at cellular resolution.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="glass rounded-3xl p-7 sm:p-9 rv">
+        <div class="flex items-center gap-4 mb-5">
+          <span class="font-display text-3xl grad-text font-700">Eka</span>
+          <span class="text-silver/40 text-2xl">—</span>
+          <span class="text-sm text-silver/70 max-w-[260px] leading-snug" data-i18n="sci_eka_label">In Sanskrit &amp; chemistry, "Eka" means "the first" — frontier of the unknown</span>
+        </div>
+        <p class="text-silver/85 leading-relaxed" data-i18n="sci_eka_text">It stands for the foundation of bodily health and the breakthrough toward the next boundary of cellular nutrition.</p>
+      </div>
+
+      <div class="glass rounded-3xl p-7 sm:p-9 rv">
+        <div class="flex items-center gap-4 mb-5">
+          <span class="font-display text-3xl grad-text font-700">Q</span>
+          <span class="text-silver/40 text-2xl">—</span>
+          <span class="text-sm text-silver/70 max-w-[260px] leading-snug" data-i18n="sci_q_label">Quotient &amp; Quantum — energy quotient &amp; micron-precision</span>
+        </div>
+        <p class="text-silver/85 leading-relaxed" data-i18n="sci_q_text">Energy Quotient: the energy intelligence of body and mind. Quantum Precision: micron-level, bio-active delivery straight to the cell, for a clean, effortless, maximum absorption experience.</p>
+      </div>
+    </div>
+
+    <div class="glass rounded-3xl mt-8 p-7 sm:p-9 rv flex flex-col lg:flex-row lg:items-center gap-6">
+      <img src="assets/logo.png" alt="EKAQ official brand logo" class="w-72 h-auto object-contain shrink-0 mx-auto lg:mx-0">
+      <div class="flex-1">
+        <p class="text-xs tracking-[.25em] text-cyanx/90 font-semibold uppercase mb-2" data-i18n="her_eyebrow">Heritage</p>
+        <p class="text-bone font-display font-600 text-xl leading-relaxed" data-i18n="her_founded">Founded in Frankfurt, Germany, 2026.</p>
+        <p class="mt-2 text-silver/80 text-sm leading-relaxed" data-i18n="her_text">German precision engineering meets pharmaceutical-grade quality control — from raw-molecule sourcing to batch verification.</p>
+      </div>
+      <div class="grid grid-cols-3 gap-4 sm:min-w-[260px] text-center">
+        <div class="rounded-xl border border-cyanx/25 p-4"><p class="font-display text-2xl text-cyanx">GMP</p><p class="text-[10px] tracking-widest text-silver/60 uppercase mt-1" data-i18n="her_gmp_label">Grade</p></div>
+        <div class="rounded-xl border border-cyanx/25 p-4"><p class="font-display text-2xl text-cyanx">3rd</p><p class="text-[10px] tracking-widest text-silver/60 uppercase mt-1" data-i18n="her_test_label">Party Tested</p></div>
+        <div class="rounded-xl border border-cyanx/25 p-4"><p class="font-display text-2xl text-cyanx">DE</p><p class="text-[10px] tracking-widest text-silver/60 uppercase mt-1" data-i18n="her_made_label">Made</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 团队 ===== -->
+<section id="team" class="relative py-20 sm:py-24">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="rv mb-12 max-w-2xl">
+      <h2 class="font-display font-700 text-3xl sm:text-4xl tracking-tight text-bone"><span data-i18n="team_h2a">Leadership &amp;</span> <span class="grad-text" data-i18n="team_h2b">Scientific Advisors</span></h2>
+      <p class="mt-4 text-silver/85 leading-relaxed" data-i18n="team_sub">Building a bench of sports-science, formulation and clinical partners. Announcements are on their way.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="glass rounded-3xl p-8 text-center rv">
+        <div class="mx-auto w-16 h-16 rounded-full border border-dashed border-cyanx/40 grid place-items-center text-cyanx/60 mb-5">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5"/></svg>
+        </div>
+        <p class="font-display font-600 text-bone" data-i18n="team_r1">Chief Formulation Officer</p>
+        <p class="text-sm text-silver/70 mt-2 leading-relaxed" data-i18n="team_r1d">Role reserved for a senior sports-nutrition scientist.</p>
+        <span class="mt-4 inline-block text-[11px] tracking-widest text-cyanx/80 uppercase" data-i18n="team_soon">Announcing soon</span>
+      </div>
+      <div class="glass rounded-3xl p-8 text-center rv">
+        <div class="mx-auto w-16 h-16 rounded-full border border-dashed border-cyanx/40 grid place-items-center text-cyanx/60 mb-5">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 3v10l4 2"/><circle cx="12" cy="12" r="9"/></svg>
+        </div>
+        <p class="font-display font-600 text-bone" data-i18n="team_r2">Head of R&amp;D</p>
+        <p class="text-sm text-silver/70 mt-2 leading-relaxed" data-i18n="team_r2d">Reserved for a formulation &amp; bio-availability specialist.</p>
+        <span class="mt-4 inline-block text-[11px] tracking-widest text-cyanx/80 uppercase" data-i18n="team_soon">Announcing soon</span>
+      </div>
+      <div class="glass rounded-3xl p-8 text-center rv">
+        <div class="mx-auto w-16 h-16 rounded-full border border-dashed border-cyanx/40 grid place-items-center text-cyanx/60 mb-5">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 21a9 9 0 1 0-6.4-15.4"/><path d="M12 21 4 21"/></svg>
+        </div>
+        <p class="font-display font-600 text-bone" data-i18n="team_r3">Clinical Advisor</p>
+        <p class="text-sm text-silver/70 mt-2 leading-relaxed" data-i18n="team_r3d">Reserved for a performance-medicine expert.</p>
+        <span class="mt-4 inline-block text-[11px] tracking-widest text-cyanx/80 uppercase" data-i18n="team_soon">Announcing soon</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 联系 ===== -->
+<section id="contact" class="relative py-20 sm:py-24">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="grid lg:grid-cols-2 gap-10 items-start">
+      <div class="rv">
+        <h2 class="font-display font-700 text-3xl sm:text-4xl tracking-tight text-bone"><span data-i18n="ct_h2a">Get in</span> <span class="grad-text" data-i18n="ct_h2b">Touch</span></h2>
+        <p class="mt-4 text-silver/85 leading-relaxed" data-i18n="ct_sub">For distribution, partnerships or product inquiries — reach us directly or send a message through the form.</p>
+        <div class="mt-8 space-y-4">
+          <a href="mailto:info@ekaq.com" class="flex items-center gap-4 glass rounded-2xl p-5 hover:border-cyanx/40 transition group">
+            <span class="w-11 h-11 rounded-xl grad-bar grid place-items-center text-deep"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></span>
+            <span><span class="block text-xs text-silver/60 uppercase tracking-widest" data-i18n="ct_email_label">Direct Email</span><span class="font-display font-600 text-bone group-hover:text-cyanx transition">info@ekaq.com</span></span>
+          </a>
+          <div class="flex items-center gap-4 glass rounded-2xl p-5">
+            <span class="w-11 h-11 rounded-xl grad-bar grid place-items-center text-deep"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.2-7-11a7 7 0 1 1 14 0c0 5.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+            <span><span class="block text-xs text-silver/60 uppercase tracking-widest" data-i18n="ct_hq_label">HQ</span><span class="font-display font-600 text-bone">Frankfurt am Main, Germany</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact form -->
+      <form id="contact-form" class="glass rounded-3xl p-6 sm:p-8 rv" novalidate>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="sm:col-span-1">
+            <label for="f-name" class="block text-xs text-silver/70 mb-1.5" data-i18n="form_name">Name</label>
+            <input id="f-name" name="name" type="text" required autocomplete="name" class="w-full rounded-xl bg-deep/60 border border-cyanx/25 px-4 py-3 text-bone placeholder-silver/40 focus:border-cyanx outline-none" placeholder="Jane Doe">
+          </div>
+          <div class="sm:col-span-1">
+            <label for="f-email" class="block text-xs text-silver/70 mb-1.5" data-i18n="form_email">Email</label>
+            <input id="f-email" name="email" type="email" required autocomplete="email" class="w-full rounded-xl bg-deep/60 border border-cyanx/25 px-4 py-3 text-bone placeholder-silver/40 focus:border-cyanx outline-none" placeholder="you@example.com">
+          </div>
+        </div>
+        <div class="mt-4">
+          <label for="f-subject" class="block text-xs text-silver/70 mb-1.5" data-i18n="form_subject">Subject</label>
+          <input id="f-subject" name="subject" type="text" required class="w-full rounded-xl bg-deep/60 border border-cyanx/25 px-4 py-3 text-bone placeholder-silver/40 focus:border-cyanx outline-none" placeholder="Partnership inquiry">
+        </div>
+        <div class="mt-4">
+          <label for="f-msg" class="block text-xs text-silver/70 mb-1.5" data-i18n="form_message">Message</label>
+          <textarea id="f-msg" name="message" rows="4" required class="w-full rounded-xl bg-deep/60 border border-cyanx/25 px-4 py-3 text-bone placeholder-silver/40 focus:border-cyanx outline-none resize-none" placeholder="Tell us what you need..."></textarea>
+        </div>
+        <div class="mt-5 flex flex-col sm:flex-row sm:items-center gap-3">
+          <button type="submit" class="btn-cta flex-1 sm:flex-none sm:px-8 py-3.5 rounded-full font-semibold text-deep grad-bar shadow-lg shadow-cyanx/25" data-i18n="form_send">Send Message</button>
+          <p class="text-xs text-silver/60 leading-snug" data-i18n="form_note">Opens your email app to finalize. Delivery via secure webhook once connected.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="border-t border-cyanx/15 bg-deep/80">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-10">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+      <a href="#top" class="flex items-center">
+        <img src="assets/ekaq-logo.png" alt="EKAQ" class="h-9 w-auto object-contain">
+      </a>
+      <nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-silver/80" aria-label="Legal">
+        <button type="button" id="legal-impressum" class="nlink p-0 bg-transparent border-0 cursor-pointer" data-i18n="ft_impressum">Impressum</button>
+        <button type="button" id="legal-datenschutz" class="nlink p-0 bg-transparent border-0 cursor-pointer" data-i18n="ft_datenschutz">Datenschutz</button>
+        <button type="button" id="legal-terms" class="nlink p-0 bg-transparent border-0 cursor-pointer" data-i18n="ft_terms">Terms of Service</button>
+      </nav>
+    </div>
+    <hr class="hairline my-6">
+    <p class="text-xs text-silver/60 leading-relaxed" data-i18n="ft_copy">© 2026 EKAQ Technologies GmbH (Frankfurt). All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ===== 成功弹窗 ===== -->
+<div id="modal" class="fixed inset-0 z-[60] hidden items-center justify-center p-6" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div id="modal-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+  <div class="relative glass rounded-3xl max-w-md w-full p-8 text-center glow">
+    <div class="mx-auto mb-4 w-14 h-14 rounded-full grad-bar grid place-items-center text-deep">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+    </div>
+    <h3 id="modal-title" class="font-display font-700 text-xl text-bone" data-i18n="modal_title">Message Ready</h3>
+    <p class="mt-3 text-sm text-silver/80 leading-relaxed" data-i18n="modal_text">Your message has been prepared in your email app. Thank you for contacting EKAQ.</p>
+    <button id="modal-close" type="button" class="mt-6 px-6 py-2.5 rounded-full border border-cyanx/40 text-bone hover:bg-cyanx/10 transition" data-i18n="modal_close">Close</button>
+  </div>
+</div>
+
+<!-- ===== 提示 Toast ===== -->
+<div id="toast" class="fixed bottom-6 left-1/2 z-[70] px-5 py-3 rounded-full glass text-sm text-bone opacity-0 pointer-events-none" style="transform:translateX(-50%) translateY(12px)" role="status" aria-live="polite"></div>
+
+<script>
+/* ===== i18n EN/DE ===== */
+const I18N = {
+  nav_products:{en:"Products",de:"Produkte"},
+  nav_science:{en:"Science & Heritage",de:"Wissenschaft & Herkunft"},
+  nav_team:{en:"Team",de:"Team"},
+  nav_contact:{en:"Contact",de:"Kontakt"},
+  hero_eyebrow:{en:"Founded in Frankfurt · 2026",de:"Gegründet in Frankfurt · 2026"},
+  hero_l1:{en:"Eka as the source,",de:"Eka als Quelle,"},
+  hero_l2:{en:"converging the microscopic Q —",de:"vereint mit dem mikroskopischen Q —"},
+  hero_l3:{en:"exploring the next unknown of the body's energy.",de:"die nächste Unbekannte der Körperenergie erkunden."},
+  hero_sub:{en:"Breakthrough bio-active nutrition for peak human performance — precision-formulated, cell-level bio-availability.",de:"Bioaktive Ernährung der nächsten Generation für Spitzenleistung — präzise formuliert, bioverfügbar auf Zellebene."},
+  hero_stat_engine:{en:"Engine",de:"Antrieb"},
+  hero_stat_origin:{en:"Origin",de:"Herkunft"},
+  hero_stat_founded:{en:"Founded",de:"Gegründet"},
+  cta_products:{en:"Explore Products",de:"Produkte entdecken"},
+  cta_contact:{en:"Get in Touch",de:"Kontakt aufnehmen"},
+  cta_subscribe:{en:"Get the 4 Pillars Box →",de:"Hol dir die 4-Säulen-Box →"},
+  pillars_h2a:{en:"The",de:"Die"},
+  pillars_h2b:{en:"4 Pillars",de:"4 Säulen"},
+  pillars_sub:{en:"EKAQ is not a single shot — it is four precision-formulated pillars, each targeting a core system of your body. One box, 30 days, four rituals a day.",de:"EKAQ ist nicht nur ein Shot – es sind vier präzise formulierte Säulen, die jeweils ein Kernsystem deines Körpers adressieren. Eine Box, 30 Tage, vier Rituale am Tag."},
+  pillar_e_title:{en:"ENERGY",de:"ENERGIE"},
+  pillar_e_sub:{en:"Metabolic Energy · Yellow",de:"Stoffwechselenergie · Gelb"},
+  pillar_e_desc:{en:"Supports normal energy-yielding metabolism and mental vitality — your morning kickstart.",de:"Unterstützt den normalen energiezuführenden Stoffwechsel und geistige Vitalität – dein Morgen-Kickstart."},
+  pillar_k_title:{en:"KINETIC",de:"KINETIK"},
+  pillar_k_sub:{en:"Kinetic Power · Orange",de:"Kinetische Kraft · Orange"},
+  pillar_k_desc:{en:"Supports strong muscles, mobile joints and stable bones — your midday movement fuel.",de:"Unterstützt starke Muskeln, bewegliche Gelenke und stabile Knochen – dein Bewegungs-Kraftstoff für den Mittag."},
+  pillar_a_title:{en:"ALERT",de:"ALERT"},
+  pillar_a_sub:{en:"Mental Focus · Green",de:"Mentaler Fokus · Grün"},
+  pillar_a_desc:{en:"Supports concentration, mental performance and cognitive health — your afternoon clarity.",de:"Unterstützt Konzentration, mentale Leistung und kognitive Gesundheit – deine Nachmittags-Klarheit."},
+  pillar_q_title:{en:"QUANTUM-SHIELD",de:"QUANTUM-SCHILD"},
+  pillar_q_sub:{en:"Cellular Immunity · Purple-Red",de:"Zelluläre Immunität · Purpurrot"},
+  pillar_q_desc:{en:"Supports a strong immune system and cells against oxidative stress — your overnight rebuild.",de:"Unterstützt ein starkes Immunsystem und die Zellen gegen oxidativen Stress – dein Übernight-Rebuild."},
+  pillars_cta:{en:"Subscribe — The 4 Pillars Box · 30 Shots",de:"Abonnieren — Die 4-Säulen-Box · 30 Shots"},
+  pillars_price:{en:"€69.90 / month · 10 shots each of E·K·A·Q · Free shipping in DE · Cancel anytime",de:"€69,90 / Monat · je 10 Shots E·K·A·Q · Kostenloser Versand in DE · Jederzeit kündbar"},
+  prod_h2a:{en:"Dual",de:"Zwei"},
+  prod_h2b:{en:"Delivery Technologies",de:"Freisetzungstechnologien"},
+  prod_sub:{en:"Two engineered formats, one principle: keep high-activity molecules stable until the moment of consumption, then deliver them with maximal bio-availability.",de:"Zwei technisch entwickelte Formate, ein Prinzip: hochaktive Moleküle bleiben bis zum Verzehr stabil und werden dann mit maximaler Bioverfügbarkeit freigesetzt."},
+  prod1_title:{en:"Push-Cap Fresh-Dispense System",de:"Push-Cap-System mit Frischfreisetzung"},
+  prod1_desc:{en:"High-activity sensitive molecules — such as monohydrate creatine — are held dry and isolated inside a sealed cap reservoir, fully separated from water. Press the cap, release the actives, shake and drink.",de:"Hochaktive, empfindliche Moleküle – wie monohydratisiertes Kreatin – werden trocken und isoliert in einem versiegelten Verschlussreservoir aufbewahrt, vollständig getrennt vom Wasser. Verschluss drücken, Wirkstoffe freisetzen, schütteln und trinken."},
+  prod1_b1:{en:"Dry–liquid separation locks potency",de:"Trocken-Flüssig-Trennung erhält die Wirksamkeit"},
+  prod1_b2:{en:"No hydrolysis, no sedimentation",de:"Keine Hydrolyse, keine Sedimentation"},
+  prod1_b3:{en:"Fresh-mixed on demand",de:"Frisch gemixt nach Bedarf"},
+  prod2_title:{en:"Precision Stick Packs",de:"Präzisions-Stickpacks"},
+  prod2_desc:{en:"Microencapsulated fine powder, precision-balanced per daily serving — 3000&nbsp;mg creatine, taurine, chelated minerals and microencapsulated D3. Add to 250–300&nbsp;mL ambient water and stir.",de:"Mikroverkapseltes Feinpulver, präzise auf eine Tagesdosis abgestimmt – 3000&nbsp;mg Kreatin, Taurin, chelatierte Mineralstoffe und mikroverkapseltes D3. In 250–300&nbsp;ml zimmerwarmes Wasser geben und umrühren."},
+  prod2_b1:{en:"Instant dissolve, zero sediment",de:"Sofort löslich, ohne Rückstände"},
+  prod2_b2:{en:"High bio-availability",de:"Hohe Bioverfügbarkeit"},
+  prod2_b3:{en:"Ultra-light, portable",de:"Ultra-leicht, tragbar"},
+  sci_h2a:{en:"Science &",de:"Wissenschaft &"},
+  sci_h2b:{en:"Origin",de:"Herkunft"},
+  sci_sub:{en:"The name encodes our thesis — the next undiscovered element of human performance, delivered at cellular resolution.",de:"Der Name trägt unsere These: das nächste, noch unentdeckte Element menschlicher Leistungsfähigkeit, auf Zellebene freigesetzt."},
+  sci_eka_label:{en:"In Sanskrit & chemistry, \"Eka\" means \"the first\" — frontier of the unknown",de:"Aus dem Sanskrit und der Chemie: „Eka“ bedeutet „das Erste“ – Grenze des Unbekannten"},
+  sci_eka_text:{en:"It stands for the foundation of bodily health and the breakthrough toward the next boundary of cellular nutrition.",de:"Es steht für das Fundament körperlicher Gesundheit und den Durchbruch an die nächste Grenze der Zellernährung."},
+  sci_q_label:{en:"Quotient & Quantum — energy quotient & micron-precision",de:"Quotient & Quantum – Energie-Quotient & Mikro-Präzision"},
+  sci_q_text:{en:"Energy Quotient: the energy intelligence of body and mind. Quantum Precision: micron-level, bio-active delivery straight to the cell, for a clean, effortless, maximum absorption experience.",de:"Energie-Quotient: die Energie-Intelligenz von Körper und Geist. Quantum-Präzision: mikrofeine, bioaktive Zustellung direkt in die Zelle – für ein klares, müheloses Erlebnis maximaler Aufnahme."},
+  her_eyebrow:{en:"Heritage",de:"Herkunft"},
+  her_founded:{en:"Founded in Frankfurt, Germany, 2026.",de:"Gegründet in Frankfurt, Deutschland, 2026."},
+  her_text:{en:"German precision engineering meets pharmaceutical-grade quality control — from raw-molecule sourcing to batch verification.",de:"Deutsche Präzisionstechnik trifft auf pharmazeutische Qualitätskontrolle – von der Beschaffung der Rohstoffe bis zur Chargenprüfung."},
+  her_gmp_label:{en:"Grade",de:"Qualität"},
+  her_test_label:{en:"Party Tested",de:"Drittgeprüft"},
+  her_made_label:{en:"Made",de:"Hergestellt"},
+  team_h2a:{en:"Leadership &",de:"Führung &"},
+  team_h2b:{en:"Scientific Advisors",de:"Wissenschaftliche Berater"},
+  team_sub:{en:"Building a bench of sports-science, formulation and clinical partners. Announcements are on their way.",de:"Wir bauen ein Netzwerk aus Sportwissenschaft, Formulierung und klinischen Partnern auf. Ankündigungen folgen in Kürze."},
+  team_r1:{en:"Chief Formulation Officer",de:"Leitung Formulierung & Entwicklung"},
+  team_r1d:{en:"Role reserved for a senior sports-nutrition scientist.",de:"Position für eine erfahrene Sport- und Ernährungswissenschaftlerin bzw. einen erfahrenen Sport- und Ernährungswissenschaftler."},
+  team_r2:{en:"Head of R&D",de:"Leitung Forschung & Entwicklung"},
+  team_r2d:{en:"Reserved for a formulation & bio-availability specialist.",de:"Reserviert für eine Fachkraft für Formulierung & Bioverfügbarkeit."},
+  team_r3:{en:"Clinical Advisor",de:"Klinischer Berater"},
+  team_r3d:{en:"Reserved for a performance-medicine expert.",de:"Reserviert für eine Expertin bzw. einen Experten für Leistungsmedizin."},
+  team_soon:{en:"Announcing soon",de:"Bald bekannt gegeben"},
+  ct_h2a:{en:"Get in",de:"Kontakt"},
+  ct_h2b:{en:"Touch",de:"aufnehmen"},
+  ct_sub:{en:"For distribution, partnerships or product inquiries — reach us directly or send a message through the form.",de:"Für Vertrieb, Partnerschaften oder Produktanfragen – kontaktieren Sie uns direkt oder senden Sie eine Nachricht über das Formular."},
+  ct_email_label:{en:"Direct Email",de:"Direkte E-Mail"},
+  ct_hq_label:{en:"HQ",de:"Sitz"},
+  form_name:{en:"Name",de:"Name"},
+  form_email:{en:"Email",de:"E-Mail"},
+  form_subject:{en:"Subject",de:"Betreff"},
+  form_message:{en:"Message",de:"Nachricht"},
+  form_send:{en:"Send Message",de:"Nachricht senden"},
+  form_note:{en:"Opens your email app to finalize. Delivery via secure webhook once connected.",de:"Öffnet Ihre E-Mail-App zum Absenden. Zustellung per sicherem Webhook nach Anbindung."},
+  modal_title:{en:"Message Ready",de:"Nachricht bereit"},
+  modal_text:{en:"Your message has been prepared in your email app. Thank you for contacting EKAQ.",de:"Ihre Nachricht wurde in Ihrer E-Mail-App vorbereitet. Danke für Ihre Kontaktaufnahme mit EKAQ."},
+  modal_close:{en:"Close",de:"Schließen"},
+  ft_impressum:{en:"Impressum",de:"Impressum"},
+  ft_datenschutz:{en:"Datenschutz",de:"Datenschutz"},
+  ft_terms:{en:"Terms of Service",de:"AGB"},
+  ft_copy:{en:"© 2026 EKAQ Technologies GmbH (Frankfurt). All rights reserved.",de:"© 2026 EKAQ Technologies GmbH (Frankfurt). Alle Rechte vorbehalten."}
+};
+let lang = "en";
+function applyLang(l){
+  lang = l;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const key=el.dataset.i18n;
+    if(I18N[key]&&I18N[key][l]) el.textContent=I18N[key][l];
+  });
+  document.getElementById("btn-en").className = l==="en" ? "px-3 py-1.5 font-semibold bg-cyanx/15 text-cyanx" : "px-3 py-1.5 text-silver/70 hover:text-bone";
+  document.getElementById("btn-de").className = l==="de" ? "px-3 py-1.5 font-semibold bg-cyanx/15 text-cyanx" : "px-3 py-1.5 text-silver/70 hover:text-bone";
+}
+document.getElementById("btn-en").addEventListener("click",()=>applyLang("en"));
+document.getElementById("btn-de").addEventListener("click",()=>applyLang("de"));
+
+/* ===== mobile menu ===== */
+const menuBtn=document.getElementById("menu-btn"), mobileMenu=document.getElementById("mobile-menu");
+menuBtn.addEventListener("click",()=>{
+  const open=mobileMenu.classList.toggle("hidden");
+  menuBtn.setAttribute("aria-expanded", String(!open));
+});
+document.querySelectorAll("#mobile-menu a").forEach(a=>a.addEventListener("click",()=>{mobileMenu.classList.add("hidden");menuBtn.setAttribute("aria-expanded","false");}));
+
+/* ===== reveal on scroll ===== */
+const rvObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");rvObs.unobserve(e.target);}});
+},{threshold:.12});
+document.querySelectorAll(".rv").forEach(el=>rvObs.observe(el));
+
+/* ===== navbar shadow on scroll ===== */
+window.addEventListener("scroll",()=>{
+  const n=document.getElementById("nav");
+  n.style.borderBottom = window.scrollY>20 ? "1px solid rgba(0,210,255,.22)" : "1px solid rgba(0,210,255,.12)";
+},{passive:true});
+
+/* ===== contact form ===== */
+const EMAIL_ENDPOINT = ""; // placeholder: e.g. "https://formspree.io/f/your_id" or EmailJS endpoint
+const form=document.getElementById("contact-form");
+const modal=document.getElementById("modal");
+function openModal(){modal.classList.remove("hidden");modal.classList.add("flex");}
+function closeModal(){modal.classList.add("hidden");modal.classList.remove("flex");}
+document.getElementById("modal-backdrop").addEventListener("click",closeModal);
+document.getElementById("modal-close").addEventListener("click",closeModal);
+
+/* ===== legal placeholder toast ===== */
+const toastEl=document.getElementById("toast");let toastTimer;
+function showToast(msg){toastEl.textContent=msg;toastEl.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastEl.classList.remove("show"),2600);}
+document.querySelectorAll("#legal-impressum,#legal-datenschutz,#legal-terms").forEach(a=>{
+  a.addEventListener("click",e=>{e.preventDefault();showToast(a.textContent.trim() + (lang==="de" ? " — Seite folgt in Kürze." : " — page coming soon."));});
+});
+
+form.addEventListener("submit",function(ev){
+  ev.preventDefault();
+  const data={name:form.name.value.trim(),email:form.email.value.trim(),subject:form.subject.value.trim(),message:form.message.value.trim()};
+  if(!data.name||!data.email||!data.subject||!data.message) return;
+  // 1) open local email client
+  const subject=encodeURIComponent("[EKAQ] "+data.subject);
+  const body=encodeURIComponent("Name: "+data.name+"\nEmail: "+data.email+"\n\n"+data.message);
+  window.location.href="mailto:info@ekaq.com?subject="+subject+"&body="+body;
+  // 2) optional webhook / form API
+  if(EMAIL_ENDPOINT){
+    try{ fetch(EMAIL_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)}).catch(()=>{}); }catch(e){}
+  }
+  openModal();
+  form.reset();
+});
+/* modal: close on Esc */
+document.addEventListener("keydown",e=>{if(e.key==="Escape") closeModal();});
+</script>
+<script>
+if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js').catch(()=>{});});}
+</script>
+</body>
+</html>
